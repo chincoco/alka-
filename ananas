@@ -1,0 +1,60 @@
+namespace alka
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int broj_jahaca = 15;
+            int[] bodovi1 = new int[broj_jahaca];
+            int[] bodovi2 = new int[broj_jahaca];
+            int[] bodovi3 = new int[broj_jahaca];
+            var ukupniBodovi = new int[broj_jahaca];
+            Random rnd = new Random();
+            for (int i=0; i < broj_jahaca; i++)
+            {
+                bodovi1[i] = rnd.Next(0, 4);
+                ukupniBodovi[i] = bodovi1[i];
+            }
+            int max = 0;
+            for (int i = 0; i < broj_jahaca; i++)
+            {
+                bodovi2[i] = rnd.Next(0, 4);
+                ukupniBodovi[i] = ukupniBodovi[i] + bodovi2[i];
+                if(ukupniBodovi[i] > max )
+                {
+                    max = ukupniBodovi[i];
+                }
+            }
+            int maxIndex = ukupniBodovi.ToList().IndexOf(max);
+            Console.WriteLine("Maksimalni broj bodova je: {0}, jahač broj: {1}", max, maxIndex);
+            Console.WriteLine("U 3. utrku nastavljaju jahači sa sljedećim brojem bodova:");
+            for (int i = 0; i < broj_jahaca; i++)
+            {
+                if (ukupniBodovi[i] > (max - 3)) {
+
+                    Console.WriteLine("{0}",ukupniBodovi[i]);
+                        
+                }
+            }
+            
+            for (int i = 0; i < broj_jahaca; i++)
+            {
+                if (ukupniBodovi[i] > (max - 3))
+                {
+
+                    bodovi3[i] = rnd.Next(0, 4);
+                    ukupniBodovi[i] = ukupniBodovi[i] + bodovi3[i];
+
+                }
+              
+            }
+            int maxValue = ukupniBodovi.Max();
+            int maxIndexUP = ukupniBodovi.ToList().IndexOf(maxValue);
+
+            Console.WriteLine("Pobjednik je jahač broj {0}, s brojem bodova {1}", maxIndexUP, maxValue);
+
+
+
+        }
+    }
+}
