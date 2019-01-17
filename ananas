@@ -10,11 +10,13 @@ namespace alka
             int[] bodovi3 = new int[broj_jahaca];
             var ukupniBodovi = new int[broj_jahaca];
             Random rnd = new Random();
+            //prva utrka
             for (int i=0; i < broj_jahaca; i++)
             {
                 bodovi1[i] = rnd.Next(0, 4);
                 ukupniBodovi[i] = bodovi1[i];
             }
+            //druga utrka 
             int max = 0;
             for (int i = 0; i < broj_jahaca; i++)
             {
@@ -26,17 +28,16 @@ namespace alka
                 }
             }
             int maxIndex = ukupniBodovi.ToList().IndexOf(max);
-            Console.WriteLine("Maksimalni broj bodova je: {0}, jahač broj: {1}", max, maxIndex);
             Console.WriteLine("U 3. utrku nastavljaju jahači sa sljedećim brojem bodova:");
-            for (int i = 0; i < broj_jahaca; i++)
+            List<int> Jahaci = ukupniBodovi.OfType<int>().ToList();
+            for (int i = 0; i < Jahaci.Count(); i++)
             {
-                if (ukupniBodovi[i] > (max - 3)) {
-
-                    Console.WriteLine("{0}",ukupniBodovi[i]);
-                        
+                if (ukupniBodovi[i] > (max - 3))
+                {
+                    Console.WriteLine($"{i}. = {Jahaci[i]}");
                 }
             }
-            
+            // treća utrka 
             for (int i = 0; i < broj_jahaca; i++)
             {
                 if (ukupniBodovi[i] > (max - 3))
@@ -44,17 +45,23 @@ namespace alka
 
                     bodovi3[i] = rnd.Next(0, 4);
                     ukupniBodovi[i] = ukupniBodovi[i] + bodovi3[i];
-
                 }
               
             }
+            Console.WriteLine("Maksimalni broj bodova je: {0}, a postigao ga je jahač broj: {1}", max, maxIndex);
+
+            Console.WriteLine("**Rezultati treće utrke: **"); 
             int maxValue = ukupniBodovi.Max();
             int maxIndexUP = ukupniBodovi.ToList().IndexOf(maxValue);
-
-            Console.WriteLine("Pobjednik je jahač broj {0}, s brojem bodova {1}", maxIndexUP, maxValue);
-
-
-
+            List<int> JahaciKonacno = ukupniBodovi.OfType<int>().ToList();
+            for (int i = 0; i < JahaciKonacno.Count(); i++)
+            {
+                if (ukupniBodovi[i] > (max - 3))
+                {
+                    Console.WriteLine($"{i}. = {JahaciKonacno[i]}");
+                }
+            }
+            Console.WriteLine("Pobjednik je jahač broj {0}, s brojem bodova: {1}", maxIndexUP, maxValue);
         }
     }
 }
